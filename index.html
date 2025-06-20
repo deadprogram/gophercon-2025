@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+
+<title>TinyGo - GopherconEU 2025</title>
+
+<meta name="description" content="TinyGo">
+<meta name="author" content="Ron Evans">
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<link rel="stylesheet" href="css/reveal.css">
+<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+<!-- For syntax highlighting -->
+<link rel="stylesheet" href="lib/css/tomorrow.css">
+
+<link rel="stylesheet" href="css/hybrid.css">
+
+<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+<script>
+	document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+</script>
+
+<!--[if lt IE 9]>
+<script src="lib/js/html5shiv.js"></script>
+<![endif]-->
+</head>
+
+<body>
+	<div class="reveal">
+
+	<!-- Any section element inside of this container is displayed as a slide -->
+	<div class="slides">
+		<section>
+			<section>
+				<h1>A Small Update On TinyGo</h1>
+				<h2>Gophercon.EU 2025 Edition</h2>
+				<h2>Ron Evans - @deadprogram</h2>
+			</section>
+		</section>
+
+		<section>
+			<h2>Ron Evans (@deadprogram)</h2>
+		</section>
+
+		<section>
+			<h1>Technologist For Hire</h1>
+		</section>
+
+		<section>
+			<h1>Technologist <u>For Hire</u></h1>
+		</section>
+
+		<section>
+			<div class="image-container">
+				<img src="images/thg-logo.png">
+			</div>
+			<h3><a href="https://hybridgroup.com" target="_blank">hybridgroup.com</a></h3>
+		</section>
+
+		<section>
+			<h1>Software that makes your hardware work</h1>
+		</section>
+	
+		<section>
+			<div class="image-container">
+			  <img src="images/tinygo-logo.png">
+			</div>
+			<h3>tinygo.org</h3>          
+		</section>
+
+		<section>
+			<h2>Go compiler for small places</h2>
+		</section>
+
+		<section>
+			<section>
+				<h2>Current stats</h2>
+			</section>
+
+			<section>
+				<h2>16k+ stars</h2>
+			</section>
+
+			<section>
+				<h2>950+ forks</h2>
+			</section>
+
+			<section>
+				<h2>250+ contributors</h2>
+			</section>
+
+			<section>
+				<h2>Over 125 different boards supported</h2>
+			</section>
+
+			<section>
+				<h2>Over 120 different sensors/displays/wireless devices/actuators supported</h2>
+			</section>
+		</section>
+
+		<section>
+			<section>
+				<h2>TinyGo Release 0.38 Highlights</h2>
+			</section>
+
+			<section>
+				<h2>Multicore in hardware</h2>
+			</section>
+
+			<section>
+				<h2>USB Mass Storage Device (MSD)</h2>
+			</section>
+
+			<section>
+				<h2>WebAssembly Boehm GC</h2>
+			</section>
+		</section>
+
+		<section>
+			<section>
+				<h2>Weighing In</h2>
+				<h3>Binary sizes for latest "Big Go" (1.24.4) and TinyGo (0.38)</h3>
+			</section>
+			<section>
+				<pre><code class="golang">
+package main
+
+func main() {
+	println("Hello world!")
+}
+				</code></pre>
+				<h3>hello.go</h3>
+			</section>
+			<section>
+				<code>
+1007800 jun 18 07:57 hello-biggo
+				</code>
+			</section>
+			<section>
+				<code>
+13968 jun 18 07:49 hello-tinygo
+				</code>
+			</section>
+			<section>
+				<div class="image-container">
+					<img src="./images/hello-size.png">
+				</div>
+				<h2>72x smaller</h2>
+			</section>
+
+			<section>
+				<pre><code class="golang">
+package main
+
+import (
+	"fmt"
+	"os"
+)
+
+func main() {
+	fmt.Println("Hello world!")
+
+	helloWorldAsBytes := []byte("Hello world!\n")
+
+	err := os.WriteFile("./helloworld.txt", helloWorldAsBytes, 0644)
+	if err != nil {
+		panic(err)
+	}
+}										
+				</code></pre>
+				<h3>hello-wasi.go</h3>
+				<h4>wasmbyexample.dev</h4>
+			</section>
+			<section>
+				<code>
+2492982 jun 18 07:59 hello-wasi-biggo.wasm
+				</code>
+			</section>
+			<section>
+				<code>
+80388 jun 18 07:47 hello-wasi-tinygo.wasm
+				</code>
+			</section>
+			<section>
+				<div class="image-container">
+					<img src="./images/hello-wasi-size.png">
+				</div>
+				<h2>31x smaller</h2>
+			</section>
+		</section>
+
+		<section>
+			<h2>TinyBench</h2>
+			<h3><a href="https://github.com/tinygo-org/tinybench" target="_blank">github.com/tinygo-org/tinybench</a></h3>
+		</section>
+
+		<section>
+			<h2>Go - TinyGo - GCC - Clang - Zig - Rust</h2>
+		</section>
+
+		<section>
+			<div class="image-container">
+				<img src="./images/tinybenchmarks.png">
+			</div>
+			<h3>Latest benchmark</h3>
+		</section>
+
+		<section>
+			<h2>TinyGo Tour</h2>
+			<h3><a href="https://tinygo.org/tour/pwm/" target="_blank">tinygo.org/tour/pwm</a></h3>
+		</section>
+
+		<section data-background-image="./images/playground-pwm.png" data-background-size="contain">
+		</section>
+
+		<section>
+			<div class="image-container">
+				<img src="./images/learn-go-pocket-book.png">
+			</div>
+			<h2>"Learn Go With Pocket Sized Projects"</h2>
+			<h3>Aliénor Latour, Donia Chaiehloud, Pascal Bertrand</h3>
+		</section>
+
+		<section>
+			<div class="image-container">
+				<img src="./images/tinygo-keeb-book.png">
+			</div>
+			<h2>TinyGo-Keebook 2025</h2>
+			<h3><a href="https://tinygo-keeb.org/en/books/index.html" target="_blank">tinygo-keeb.org/en/books/index.html</a></h3>
+		</section>
+
+		<section>
+			<h2>TinyGo Conference 2025 - Japan</h2>
+			<h3>Akihabara (Tokyo) - Oct. 12, 2025</h3>
+			<h3><a href="https://conf.tinygo-keeb.org/2025" target="_blank">conf.tinygo-keeb.org/2025</a></h3>
+		</section>
+		
+		<section>
+			<div class="image-container">
+				<img src="./images/tinygo-in-toledo.jpg">
+			</div>
+			<h2>TinyGo at the Universidad Laboral de Toledo</h2>
+		</section>
+
+		<section>
+			<div class="image-container">
+				<img src="./images/webassembly-logo.png">
+			</div>
+			<h2>Webassembly</h2>
+			<h3>wasm, wasi, and wasm-unknown</h3>
+		</section>
+
+		<section>
+			<h2>Welcome, Big Go!</h2>
+			<h3>WASI P1 has landed</h3>
+		</section>
+
+		<section>
+			<div class="image-container">
+				<img src="./images/wasmcloud-tinygo.webp">
+			</div>
+			<h2>Walkthrough: A wasmCloud CRUD application in Go</h2>
+			<h3><a href="https://wasmcloud.com/blog/2025-01-23-walkthrough-a-wasmclod-crud-application-in-go" target="_blank">wasmcloud.com/blog/2025-01-23-walkthrough-a-wasmclod-crud-application-in-go</a></h3>
+		</section>
+
+		<section>
+			<div class="image-container">
+				<img src="./images/firefly-zero-lux-outlined.png">
+			</div>
+			<h2>Firefly Zero</h2>
+			<h3>Game console running WebAssembly</h3>
+			<h3><a href="https://fireflyzero.com" target="_blank">fireflyzero.com</a></h3>
+		</section>
+
+		<section data-background-image="./images/firefly-zero-console.jpg" data-background-size="contain">
+		</section>
+
+		<section>
+			<div class="image-container">
+				<img src="./images/wasmvision-logo.png">
+			</div>
+			<h2>wasmVision</h2>
+			<h3><a href="https://wasmvision.com" target="_blank">wasmvision.com</a></h3>
+		</section>
+
+		<section data-background-image="./images/mosaic-processor.png" data-background-size="contain">
+		</section>
+
+		<section>
+			<h2>All About The Hardware</h2>
+		</section>
+
+		<section>
+			<div class="image-container">
+				<img src="./images/tinygo-playstation-2.webp">
+			</div>
+			<h2>Golang on the PlayStation 2</h2>
+			<h3><a href="https://rgsilva.com/blog/ps2-go-part-1" target="_blank">rgsilva.com/blog/ps2-go-part-1</a></h3>
+			<h3><a href="https://hackaday.com/2025/03/31/golang-on-the-ps2" target="_blank">hackaday.com/2025/03/31/golang-on-the-ps2</a></h3>
+		</section>
+
+		<section>
+			<div class="image-container">
+				<img src="./images/colmi-ring.webp">
+			</div>
+			<h2>Hoard of the rings</h2>
+			<h3>extracting data from Colmi BLE annular activity trackers</h3>
+			<h3><a href="https://blog.smittytone.net/2025/04/09/hoard-of-the-rings-colmi" target="_blank">blog.smittytone.net/2025/04/09/hoard-of-the-rings-colmi</a></h3>
+		</section>
+
+		<section>
+			<div class="image-container">
+				<img src="./images/eclairm0.webp">
+			</div>
+			<h2>Eclair M0</h2>
+			<h3>pocket notepad</h3>
+			<h3><a href="https://mateusznowak.dev/projects/eclair-pocket-notepad" target="_blank">mateusznowak.dev/projects/eclair-pocket-notepad</a></h3>
+		</section>
+
+		<section>
+			<div class="image-container">
+				<img src="./images/merliot-screen.png">
+			</div>
+			<h2>Merliot</h2>
+			<h3>AI-integrated device hub</h3>
+			<h3><a href="https://merliot.io" target="_blank">merliot.io</a></h3>
+		</section>
+
+		<section>
+			<h2>go-haystack</h2>
+			<h3>Build your own AirTags</h3>
+			<h3><a href="https://github.com/hybridgroup/go-haystack" target="_blank">github.com/hybridgroup/go-haystack</a></h3>
+		</section>
+
+		<section data-background-image="./images/go-haystack-map.png" data-background-size="contain">
+		</section>
+
+		<section>
+			<div class="image-container">
+				<img src="./images/tkey-open-lid.png">
+			</div>
+			<h2>TinyGo-TKey1</h2>
+			<h3>FPGA-based USB security token</h3>
+			<h3><a href="https://github.com/hybridgroup/tinygo-tkey" target="_blank">github.com/hybridgroup/tinygo-tkey</a></h3>
+		</section>
+
+		<section>
+			<div class="image-container">
+				<img src="./images/fallthrough-logo.webp">
+			</div>
+			<h2>"From TinyGo to Takeoff (Loading fuel into highly explosive rockets with Go)"</h2>
+			<h3>Patricio Whittingslow on Fallthrough</h3>
+			<h3><a href="https://fallthrough.transistor.fm/episodes/loading-fuel-into-highly-explosive-rockets-with-go" target="_blank">fallthrough.transistor.fm/episodes/loading-fuel-into-highly-explosive-rockets-with-go</a></h3>
+		</section>
+
+		<section>
+			<h2>Flight Head Tracker</h2>
+			<h3><a href="https://github.com/ysoldak/HeadTracker" target="_blank">github.com/ysoldak/HeadTracker</a></h3>
+		</section>
+
+		<section data-background-image="./images/plane-roll.gif" data-background-size="contain">
+		</section>
+
+		<section>
+			<section>
+				<h2>TinyGo at Gophercon EU 2025</h2>
+			</section>
+		</section>
+
+		<section>
+			<section>
+				<h2>Hardware Hack Session</h2>
+				<h3>Day 1</h3>
+			</section>
+
+ 			<section data-background-image="./images/gopherconeu-2025-day1.jpg" data-background-size="contain">
+			</section>
+		</section>
+
+		<section>
+			<section>
+				<h2>TinyGo multicore talk</h2>
+				<h3>Ayke (@aykevl)</h3>
+			</section>
+
+ 			<section data-background-image="./images/mandelbrot-before.gif" data-background-size="contain">
+			</section>
+
+ 			<section data-background-image="./images/mandelbrot-after.gif" data-background-size="contain">
+			</section>
+		</section>
+
+		<section>
+			<h2>You are here</h2>
+		</section>
+
+		<section>
+			<h2>Hardware Hack Session - Part 2</h2>
+			<h3>Tomorrow - 10 AM - Courtyard</h3>
+		</section>
+
+		<section>
+			<h3>fed: @tinygo@mastodon.social</h3>
+			<h3>bsky: @tinygo.org</h3>
+		</section>
+
+		<section>
+			<h2>tinygo.org</h2>
+		</section>
+
+		<section>
+			<h1>Thank you!</h1>
+			<h2>@deadprogram</h2>
+			<h2>Technologist For Hire</h2>
+		</section>	
+	  </div>
+	</div>
+
+	<script src="lib/js/head.min.js"></script>
+	<script src="js/reveal.min.js"></script>
+	<script src="js/hybrid.js"></script>
+
+	<script>
+
+	  // Full list of configuration options available here:
+	  // https://github.com/hakimel/reveal.js#configuration
+	  Reveal.initialize({
+		controls: true,
+		progress: true,
+		history: true,
+		center: true,
+
+		// 16:9 aspect ratio
+		width: 1280,
+		height: 720,
+
+		theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+		transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+		// Optional libraries used to extend on reveal.js
+		dependencies: [
+		  { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+		  { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+		  { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+		  { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+		  { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+		  { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+		]
+	  });
+	</script>
+
+  </body>
+</html>
